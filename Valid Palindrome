@@ -1,0 +1,29 @@
+https://leetcode.com/problems/valid-palindrome-ii/
+
+
+
+Check till left and right are equal.
+Jahan pe equal ni  hai wha se ya to i aage jaegga ya j peeche to dono case chek kro
+pehle i ko aage karo aur wha se palidrome chek krte jao
+Fir j ko peeeche aur wha se palindrome check.
+
+
+
+  bool validPalindrome(string s) {
+        int i=0,j=s.size()-1;
+        while(i<j)
+        {
+            if(s[i]!=s[j])
+            {
+                int first=i+1,second=j-1;
+                while(first<j) 
+                {if(s[first]!=s[j]) break; first++; j--;} 
+                while(i<second) 
+                {if(s[i]!=s[second]) break;  i++; second--; }
+                return first>=j||i>=second;
+            }
+            i++;
+            j--;
+        }
+        return true;
+    }
