@@ -1,0 +1,17 @@
+#for any index i , product except itself is product of multiple of prefix and suffix of i
+
+ vector<int> productExceptSelf(vector<int>& nums) {
+       int prefix[nums.size()];
+       int suffix[nums.size()];
+        prefix[0]=1;
+        for(int i=1;i<nums.size();i++)
+            prefix[i]=prefix[i-1]*nums[i-1];
+        suffix[nums.size()-1]=1;
+        for(int j=nums.size()-2;j>=0;j--)
+                suffix[j]=suffix[j+1]*nums[j+1];
+        vector<int> v;
+        for(int i=0;i<nums.size();i++)
+            v.push_back(prefix[i]*suffix[i]);
+        return v;
+            
+    }
