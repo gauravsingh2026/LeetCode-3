@@ -1,0 +1,79 @@
+#check for abcade
+#vimeo Interview me aya tha.
+
+class Solution {
+public:
+    int lengthOfLongestSubstring(string s) {
+       
+        int maxi=0,count=0;
+        map<char,int> m;
+       int i=0,j=0;
+        while(j<s.size()){
+        
+       if(m[s[j]]==0)
+         { m[s[j]]=j+1; 
+           count++;
+          j++;
+          cout<<count;
+         }
+         else
+            {
+             
+               // cout<<count;
+                maxi=max(maxi,count);
+                while(i<=m[s[j]])
+                {
+                    m[s[i]]=0;
+                    i++;
+                }
+             
+                m[s[j]]=j+1;
+             count=j-i+1;
+             j++;
+              
+            }
+        }
+        
+        return max(maxi,count);
+    }
+};
+
+
+
+
+
+
+class Solution {
+public:
+    int lengthOfLongestSubstring(string s) {
+       
+        int maxi=0,count=0;
+        map<char,int> m;
+       int i=0,j=0;
+        while(j<s.size()){
+        
+       while(j<s.size() && m[s[j]]==0)
+         { m[s[j]]=j+1; 
+           count++;
+          j++;
+         }
+             maxi=max(maxi,count);
+         if(j<s.size() && m[s[j]]!=0)
+            {
+             
+                while(i<=m[s[j]])
+                {
+                    m[s[i]]=0;
+                    i++;
+                }
+             
+                m[s[j]]=j+1;
+                count=j-i+1;
+                j++;
+              
+            }
+        }
+        
+        return maxi;
+    }
+};
