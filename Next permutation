@@ -1,0 +1,30 @@
+# [12495] => [12549]
+
+# Peeche se dekhna suru kro jha pehla downfall ho wha ruko.
+# iss number ko replace krna hai --- uss number se jo peeche se just iske bara ho...mtlb jo is number se just bara ho.
+
+# uske bad peeche se replaced digit tk reverse krna h...qki hmko just next wala chahye...to replaced digit se aage chalne pe ye jiada - jiada hona chahye aage jane pe
+\\
+
+class Solution {
+public:
+    void nextPermutation(vector<int>& a) {
+      int n=a.size()-1;
+        int i,j;
+        for( i=n-1;i>=0;i--)
+        {
+            if(a[i]<a[i+1])
+                break;
+        }
+        if(i<0)
+            reverse(a.begin(),a.end());
+        else 
+        { for(j=n;j>i;j--)
+            if(a[j]>a[i])
+                break;
+        swap(a[i],a[j]);
+         reverse(a.begin()+i+1,a.end());
+        }
+        
+    }
+};
