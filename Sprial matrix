@@ -1,0 +1,47 @@
+#we have to check for test case where sometime colbegin<colend but rowbegin > row end 
+#like in the case [[1,2,3]
+#in this case while traversing left 1,2,3, is printed. Now rowbegin is increased so rowbegin>rowend, but still colend>colbegin s
+#so a loop  from colend to colbegin will follow up again priting 2,1 which is wrong
+#so while going  opposite of direction i.e right and upwards chek for condition rowbegin>=rowend & colbegin>=colend respectively
+
+class Solution {
+public:
+   vector<int> spiralOrder(vector<vector<int>>& matrix) {
+            int n=matrix.size();
+        int ul=0,ur=0,dl=n-1,dr=n-1;
+        vector<int>v;
+      int rowbegin=0,rowend=matrix.size()-1;
+       int colbegin=0,colend=matrix[0].size()-1;
+       //return v;  
+      
+            //right
+        while(colbegin<=colend && rowbegin<=rowend){
+             for(int i=colbegin;i<=colend;i++)
+            v.push_back(matrix[rowbegin][i]);
+      rowbegin++;
+            //down
+        for(int i=rowbegin;i<=rowend;i++)
+            v.push_back(matrix[i][colend]);
+        colend--;
+         //left
+            if(rowend>=rowbegin){
+           for(int i=colend;i>=colbegin;i--)
+                v.push_back(matrix[rowend][i]);
+                rowend--;
+            }
+        
+            
+            //up
+            if(colend>=colbegin){
+        for(int i=rowend;i>=rowbegin;i--)
+            v.push_back(matrix[i][colbegin]);
+        colbegin++;
+            }
+            
+        }
+    
+        
+        
+        return v;
+    }
+};
