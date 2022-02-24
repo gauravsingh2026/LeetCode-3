@@ -1,0 +1,28 @@
+#if the square is of same color as ne just return 
+Testcase [[0,0,0],[0,1,1]] 1, 1,1
+
+
+class Solution {
+public:
+    void util(vector<vector<int>>& image, int r, int c,int old, int newC)
+    {
+        if(r<0 || r==image.size()|| c<0 || c==image[0].size())
+            return ;
+        if(image[r][c]==newC)
+            return ;
+        if(image[r][c]!=old)
+            return ;
+       
+        image[r][c]=newC;
+        util(image,r-1,c,old,newC);
+        util(image,r,c-1,old,newC);
+        util(image,r,c+1,old,newC);
+        util(image,r+1,c,old,newC);
+    }
+    vector<vector<int>> floodFill(vector<vector<int>>& image, int sr, int sc, int newColor) {
+        int oldColor=image[sr][sc];
+      //  cout<<image.size()<<image[0].size();
+        util(image,sr,sc,oldColor,newColor);
+        return image;
+    }
+};
