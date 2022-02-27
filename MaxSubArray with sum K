@@ -1,6 +1,7 @@
 #We used prefix sum to store sum till that number and then traversed from 0 till that number such that every time we remove the traversed number and find the sum.
 #this was giving TLE.
 
+https://leetcode.com/problems/subarray-sum-equals-k/
 
 class Solution {
 public:
