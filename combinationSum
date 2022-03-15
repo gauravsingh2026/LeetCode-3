@@ -1,0 +1,34 @@
+just think of a simple backtracking solution
+For repeated number to include in our sum just call the function again for same number.
+Its just about including and not including an index.
+Also we need to keep backtracking in mind, wee need to pop out to get back to previous state.
+
+
+class Solution {
+public:
+    void utils(vector<vector<int>>& ans,vector<int>& res,vector<int>& candidate,int i, int target)
+    {
+        if(target==0)
+        {
+            ans.push_back(res);
+            return ;
+        }
+        if(target<0)
+            return;
+        if(i==candidate.size())
+        {
+              return;
+        }
+        utils(ans,res,candidate,i+1,target);
+        res.push_back(candidate[i]);
+        utils(ans,res,candidate,i,target-candidate[i]);
+        res.pop_back();
+        
+    }
+    vector<vector<int>> combinationSum(vector<int>& candidates, int target) {
+        vector<vector<int>> ans;
+        vector<int> res;
+        utils(ans,res,candidates,0,target);
+        return ans;
+    }
+};
