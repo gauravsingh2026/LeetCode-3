@@ -1,0 +1,28 @@
+ It worked for even length linked list because we got a self loop at the end.
+ 
+class Solution {
+public:
+    void reorderList(ListNode* head) {
+        stack<ListNode*> st;
+        int count=0;
+        ListNode* temp=head;
+        while(temp!=NULL)
+        {
+            st.push(temp);
+            count++;
+            temp=temp->next;
+        }
+       temp=head;
+        for(int i=0;i<count/2;i++)
+        {
+            ListNode* temp2=st.top();
+            st.pop();
+            temp2->next=temp->next;
+            temp->next=temp2;
+            temp=temp->next->next;
+        }
+        temp->next=NULL;
+       
+        
+    }
+};
