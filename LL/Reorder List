@@ -1,4 +1,27 @@
+ All we are doing is traversing the list , counting nodes and pushing in the stack.
+ Then we start traversing again but this time we pop an element from stack and add them between every two node and we do this for half list.
+ If the nodes are 5 we do it for two times i.e for two top of stack.
+ 1->2->3->4->5  
+ st---1,2,3,4,5
+ curr=curr->next->next so curr=1
+ 1->5->2->3->4->5
+ st---1,2,3,4
+ curr=curr->next->next so curr=2
+ 1->5->2->4->3->4->5
+ st--1,2,3,4,5
+ curr=curr->next->next so curr=3
+ 
+ now we do cur->next=null;
+ now at the end we do
+ 
  It worked for even length linked list because we got a self loop at the end.
+ 1->2->3->4
+ 1->4->2->3->4 curr=2
+ 
+ 1->4->2->3-self loop to itsef  
+ so 3 ka next v 3 ko point krega
+ curr=3  curr->next=curr // important tha ye
+ curr->next=null;
  
 class Solution {
 public:
