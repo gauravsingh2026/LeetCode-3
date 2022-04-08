@@ -1,5 +1,17 @@
 dummy node
+1->2->3->3->4->5
+when curr at 2,
+1->2 3->3->4->5
+   |____^
+curr->next=curr->next->next
 
+Again we have to repeat this step as crr->next=3
+so 
+  1->2 3->3->4->5
+     |_______^
+     
+     
+     
 
 /**
  * Definition for singly-linked list.
