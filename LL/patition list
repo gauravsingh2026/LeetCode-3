@@ -1,0 +1,53 @@
+we find a place after which the nodes are to be inserted , Named it as pre., moved temp to pre->nedxt
+So our node will come between pre and temp that's why we nedded these pointer.
+Point is we have to maintain order , that's why we will have to keep moving pre to pre->next
+
+We checked if the curr node's value is less than partition value we put it ahead of pre.
+1,4,3,0,2,5,2 pre=1,temp=4,curr=3
+swapped
+1,0,4,3,2,5,2 moved pre pre->next
+              so pre=0,temp=4,curr=3
+1,0,2,4,3,5,2   
+              so pre=2,temp=4,curr=3
+ 1,0,2,4,3,5,2  so pre=2,temp=4,curr=curr->next=5
+                 curr will move only if the next value is greater
+ 1,0,2,2,4,3,5  pre=2,temp=4 curr=5 but curr->next=NULL
+
+/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     ListNode *next;
+ *     ListNode() : val(0), next(nullptr) {}
+ *     ListNode(int x) : val(x), next(nullptr) {}
+ *     ListNode(int x, ListNode *next) : val(x), next(next) {}
+ * };
+ */
+class Solution {
+public:
+    ListNode* partition(ListNode* head, int x) {
+        ListNode* dummy=new ListNode(0);
+        dummy->next=head;
+        ListNode* pre=dummy;
+        while(pre->next && pre->next->val<x)
+            pre=pre->next;
+        ListNode* curr=pre;
+        
+        while(curr && curr->next)
+        {
+            if(curr->next && curr->next->val>=x)
+                 curr=curr->next;
+            else{
+               cout<<curr->val;
+                 ListNode* temp=pre->next;
+                pre->next=curr->next;
+             
+                curr->next=curr->next->next;
+                pre->next->next=temp;
+                pre=pre->next;
+            }
+            
+        }
+        return dummy->next;
+    }
+};
