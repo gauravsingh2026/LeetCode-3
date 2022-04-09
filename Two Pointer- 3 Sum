@@ -1,7 +1,7 @@
  #the catch here was to remove duplicay.
  #for that while loops are used to implement j and k accordingly 
  #i is also moved till i matches its prev value
- 
+ Also see 4 sum
  
  
  int n=nums.size();
