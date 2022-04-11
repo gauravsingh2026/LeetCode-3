@@ -1,0 +1,27 @@
+FOr n>0 it is no issue
+for n<0 and n is even 
+      pow(2,-2)=1/2*1/2=0.25
+    but if n is odd
+      pow(2,-3) =1/2*1/2*1/2
+      so when n is odd if it is negative recur*1/x*recur
+      if it is positive and odd recur*x*recur
+
+
+class Solution {
+public:
+    double myPow(double x, int n) {
+     if(n==0)
+         return 1;
+     if(n==-1)
+         return 1/x;
+    double d=myPow(x,n/2);
+     if(n&1){
+         if(n>0) 
+             return d*x*d;
+         else
+             return d*(1/x)*d;
+     }
+        else
+            return d*d;
+    }
+};
