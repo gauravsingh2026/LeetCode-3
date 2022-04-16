@@ -1,0 +1,41 @@
+We think o it as kdanes 
+First we check whether a solution is possible or not .
+Maintain a diifference array.
+If solution is possible , We are gonna maintain a window and whenever the sum of difference in that window ( which means the reserved petrol in tank) wents to zero
+We understad that yha tk ane me aur petrol lagega .....means tum peechla petrol pump se suru kie tb bhi ni aa pae to obviously window ke beech me knh se karoge
+To nahi hi aa paoge , becoz petrol to har jagh bdh rha...ISka mtlb ki hme jha pe zero  se kam hua wha se suru krna h.
+So basically we find the first postion jha se end tak phuch skte .
+Qki solution possible h to first postision hi anser dega.
+
+
+class Solution {
+public:
+    int canCompleteCircuit(vector<int>& gas, vector<int>& cost) {
+        vector<int> diff;
+        int n=gas.size();
+        for(int i=0;i<gas.size();i++)
+        diff.push_back(gas[i]-cost[i]);
+        int sum=0;
+        for(int i=0;i<n;i++)
+        {
+            sum+=diff[i];
+        }
+        int i=0,j=0,window_sum=0;
+        if(sum>=0)
+        {
+            while(j<n)
+            {
+             window_sum+=diff[j];
+                if(window_sum<0)
+                {
+                    window_sum=0;
+                    i=j+1;
+                }
+                j++;
+            }
+            if(window_sum>=0)
+                return i;
+        }
+        return -1;
+    }
+};
