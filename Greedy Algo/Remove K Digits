@@ -1,0 +1,43 @@
+most significatn digit pe sbse kam wala number hoga
+stack apne upr sirf badhta hua dekhega
+
+
+class Solution {
+public:
+    string removeKdigits(string num, int k) {
+        stack<char> s;
+        for(int i=0;num[i]!='\0';i++)
+        {
+                while(k>0 && !s.empty() && s.top()>num[i])
+                {
+                    --k;
+                    s.pop();
+                }
+              s.push(num[i]);
+            //remove trailing zero
+            //zero sbko hata ke ghusta chla jaega jab tak ki stack empty na ho
+            //empty hone ke bad tarailing zero bachega jo ni chahye
+            
+            
+            if(s.size()==1 && s.top()=='0')
+                s.pop();
+        }
+        //one more thing to notice 
+        //agar k still bacha hua hai to last se hatana suru kro, qki sbse bara udhar hi hoga
+        while(k && !s.empty())
+        {
+            s.pop();
+            k--;
+        }
+        
+        string res="";
+        while(!s.empty())
+        {
+            res+=s.top();
+            s.pop();
+        }
+        reverse(res.begin(),res.end());
+        if(res.size()==0) return res+='0';
+        return res;
+    }
+};
