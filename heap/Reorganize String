@@ -1,0 +1,57 @@
+//at any given time take the most frequent element and place alternatively
+//aabbbcc// b 3 a 2 c 2 //
+// babacbc
+//to place alternatively pop 2 element
+//edge case to determine when heap has only one size
+//if at that time frequency is greater than 1 it is not possible to place the element
+//heap<pair<int,char>>
+https://leetcode.com/problems/reorganize-string/discuss/492827/Python-Simple-heap-solution-with-detailed-explanation 
+ this solution link explains everything
+class Solution {
+public:
+    string reorganizeString(string s) {
+      map<char,int> m;
+       for(int i=0;i<s.size();i++)
+       {
+          
+               m[s[i]]++;
+       }
+        
+        vector<pair<int,char>> p;
+        for(auto i:m)
+        {
+            int x=i.second;
+            char c=i.first;
+            cout<<c<<" "<<x<<endl;
+            p.push_back({x,c});
+        }
+        priority_queue<pair<int,char>> pq(p.begin(),p.end());
+        string res="";
+        while(pq.size()>1)
+        {
+            pair<int,char> prior=pq.top();
+            pq.pop();
+            pair<int,char> later=pq.top();
+            pq.pop();
+            res+=prior.second;
+            res+=later.second;
+            prior.first--;
+            later.first--;
+            if(prior.first>0)
+            pq.push(prior);
+            if(later.first>0)
+            pq.push(later);
+            cout<<prior.first<<" "<<later.first;
+        }
+        if(pq.size()==1)
+        {
+            pair<int,char> last=pq.top(); 
+            if(last.first>1)
+                return "";
+            else
+                res+=last.second;
+        }
+       return res;
+       
+    }
+};
