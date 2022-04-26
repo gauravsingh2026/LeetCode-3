@@ -1,0 +1,40 @@
+class Solution {
+public:
+    int furthestBuilding(vector<int>& a, int bricks, int ladders) {
+        priority_queue<int> pq;
+        int i=1;
+        for(i;i<a.size();i++)
+        {
+            cout<<i;
+            int diff=a[i]-a[i-1];
+            if(diff<0) continue;
+            if(bricks>=diff) 
+            { 
+                bricks-=diff;
+               pq.push(diff);
+               // continue;
+            }
+            else
+            {
+                if(ladders )
+                {
+                   if(pq.size()>0)
+                   {int x=pq.top();
+                  if(diff<x) 
+                  {
+                     pq.pop();
+                     pq.push(diff);
+                     bricks+=(x-diff);
+                  }
+                   }
+                    ladders--;
+                }
+                else
+                    break;
+            } 
+            
+        }
+       cout<<bricks<<ladders;
+        return i-1;//-1;
+    }
+};
