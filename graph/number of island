@@ -1,0 +1,58 @@
+//struct use krna for code clarity jaha tk ho ske
+struct node{
+    int x;
+    int y;
+   // char content;
+    node(int _x,int _y)
+    {
+        x=_x;
+        y=_y;
+       // content=_content;
+    }
+};
+class Solution {
+public:
+
+    int numIslands(vector<vector<char>>& grid) {
+  
+        int count=0;
+         int m = grid.size(), n = m ? grid[0].size() : 0;
+         int dx[4]={-1,0,1,0};
+            int dy[4]={0,1,0,-1};
+        for(int i=0;i<m;i++)
+        {
+            for(int j=0;j<n;j++)
+            {//agar islad hai to suru
+                if(grid[i][j]=='1')
+                { 
+                    count++; //har disconnecte 1 ek island hoga
+                    grid[i][j]='0'; // qki peeche ni jana
+                //bfs kr rhe to charo trph ka ek sath push hoga islie 
+                    //infinte loop me ja skta bina iske
+                    queue<node> q;
+                    q.push(node(i,j));
+                    while(!q.empty())
+                    {    
+                        int x=q.front().x;
+                        int y=q.front().y;
+                        q.pop();
+                        for(int i=0;i<=3;i++)
+                        { //trick to push charo trph ka
+                          int newx=x+dx[i];
+                          int newy=y+dy[i];
+                            if(newx>=0 && newx<m && newy>=0 && newy<n && grid[newx][newy]=='1')
+                            {
+                             grid[newx][newy]='0';
+                                q.push(node(newx,newy));
+                            }
+                        }
+                    }
+                    
+                }
+                //node(i,j,1))
+            }
+        }
+        return count;
+        
+    }
+};
