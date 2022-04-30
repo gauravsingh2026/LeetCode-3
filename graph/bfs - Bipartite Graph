@@ -1,0 +1,59 @@
+https://leetcode.com/problems/is-graph-bipartite/submissions/
+
+
+class Solution {
+public:
+    bool isOddLengthCycle(vector<int>& color,vector<vector<int>>& graph,int node)
+    {
+        //bfs use krnge
+    //pehle to die hue color se rango mostly wo zero hi hoga
+    
+    //    color[node]=nodeColor;
+        //ye lne ka jroort hi ni
+        color[node]=0;
+        queue<pair<int,int>> q;
+        q.push({node,0});
+        while(!q.empty())
+        {
+            int nodepop=q.front().first;
+            int nodeColorque=q.front().second;
+            q.pop();
+            for(int it: graph[nodepop])
+            {
+                //agar color ni hai to theek hai
+                if(color[it]==-1)
+                {
+                   color[it]=!nodeColorque;
+                  q.push({it,color[it]});
+                }
+                else
+                    ///agar already colored hai , to check kro ki parent ke color ka na ho , agar hai matlb odd length cycle hai
+                    if(color[it]==nodeColorque)
+                        return true;
+            }
+            
+        }
+        return false;
+    }
+    bool isBipartite(vector<vector<int>>& graph) {
+        ///if odd length cyle return false;
+        int nodes=graph.size();
+        vector<int> color(nodes);
+        //memset(color,-1,sizeof(color));
+        for(int i=0;i<nodes;i++)
+            color[i]=-1;
+        //ye har disconnected part ke lie tha
+        for(int it=0;it<graph.size();it++)
+        {
+            if(color[it]==-1)
+            {
+              if(isOddLengthCycle(color,graph,it))
+                  //agar odd length cycle hai to kabhi bipartite ni hogA
+                  return false;
+            }
+            
+        }
+        return true;
+        
+    }
+};
